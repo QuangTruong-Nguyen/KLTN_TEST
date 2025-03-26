@@ -1,6 +1,12 @@
 # import google.generativeai as genai
 from google import genai
 from typing import List
+import os
+from dotenv import load_dotenv
+
+
+load_dotenv()
+
 def summarize_text(text_chunks: List[str]) -> List[str]:
     '''
         Tóm tắt danh sách các đoạn văn bản bằng mô hình Gemini.
@@ -11,7 +17,8 @@ def summarize_text(text_chunks: List[str]) -> List[str]:
             List[str]: Danh sách các đoạn văn bản đã được tóm tắt.            
     '''
     summaries = []
-    client = genai.Client(api_key='xxxxxxxxxxxx')
+    gemini_key = os.getenv('GEMINI_API_KEY')
+    client = genai.Client(api_key=gemini_key)
 
     for text in text_chunks:
         prompt = f"""
@@ -33,6 +40,6 @@ def summarize_text(text_chunks: List[str]) -> List[str]:
 
 if __name__ == "__main__":
     example_texts = ["This is a sample text that needs to be summarized."]
-    # api_key = "your_api_key_here"  # Thay thế bằng API key thực tế
+    
     result = summarize_text(example_texts)
     print(result)

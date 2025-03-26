@@ -2,6 +2,9 @@ from models import ToolOutput
 from tavily import TavilyClient
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 
 def embedding():
@@ -37,7 +40,7 @@ def tavily_search(question: str) -> ToolOutput:
     print("---Tavily---")
     try:
         # Tool logic here
-        client = TavilyClient("xxxxxxxx")
+        client = TavilyClient(os.getenv('API_TAVILY'))
         response = client.search(
             query=question,
             max_results=1
@@ -50,5 +53,6 @@ def tavily_search(question: str) -> ToolOutput:
     
 
 if __name__ == "__main__":
-    result=retrieve("Khai thác dữ liệu ?")
+    # result=retrieve("Khai thác dữ liệu ?")
+    result=tavily_search("Data Mining")
     print(result)

@@ -11,6 +11,11 @@ from unstructured.partition.api import partition_via_api
 import base64
 from IPython.display import Image, display
 from typing import Any,List, Dict
+import os
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 
 # secret_value_0 = 
@@ -63,8 +68,8 @@ def chunk_data(path_file: str) -> Any:
         combine_text_under_n_chars=2000,       
         new_after_n_chars=6000,
 
-        # api_url=,
-        # api_key=,
+        api_url= os.getenv('URL_UNSTRUCTURED'),
+        api_key=os.getenv('API_KEY_UNSTRUCTURED'),
     )
     return chunks
 

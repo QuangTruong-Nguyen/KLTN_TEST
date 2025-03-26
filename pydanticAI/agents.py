@@ -6,6 +6,10 @@ from pydantic_ai.providers.google_gla import GoogleGLAProvider
 # from pydantic_ai.models.cohere import CohereModel
 from models import ToolOutput
 import yaml
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
 
 def load_prompts_from_yaml(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
@@ -16,12 +20,12 @@ def initialize_llm_models():
     """Initialize language models."""
     llm = GroqModel(
         'llama-3.3-70b-versatile', 
-        provider=GroqProvider(api_key='xxxxxxxxxx')
+        provider=GroqProvider(api_key=os.getenv('API_KEY_GROQ'))
     )
     
     llm2 = GeminiModel(
         'gemini-2.0-flash', 
-        provider=GoogleGLAProvider(api_key='xxxxxxxxxxxx')
+        provider=GoogleGLAProvider(api_key=os.getenv('API_GEMINI_MODEL'))
     )
     
     return llm, llm2
@@ -29,7 +33,7 @@ def initialize_llm_models():
 def initialize_agents():
     """Initialize agents with the provided prompts and language models."""
     
-    prompts = load_prompts_from_yaml('D:/KLTN2/pydanticAI/prompt.yaml')
+    prompts = load_prompts_from_yaml('./pydanticAI/prompt.yaml')
     llm, llm2 = initialize_llm_models()
     
     quizz_agent = Agent(
@@ -54,7 +58,7 @@ def initialize_agents():
 
 if __name__ == "__main__":
 
-    file_path = 'D:/KLTN2/pydanticAI/prompt.yaml'
+    file_path = './pydanticAI/prompt.yaml'
     
     # Load prompts
     prompts = load_prompts_from_yaml(file_path)
