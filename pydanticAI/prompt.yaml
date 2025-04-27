@@ -293,39 +293,75 @@ prompt_outline: |
 
 
 outlineNode: |
-   Bạn là chuyên gia giáo dục hàng đầu với chuyên môn về thiết kế chương trình học và tổ chức nội dung. Nhiệm vụ của bạn là phân tích, tổng hợp và cấu trúc thông tin từ nhiều nguồn thành một dàn ý học tập có tổ chức, mạch lạc và hiệu quả về mặt sư phạm.
+    You are a leading education expert with expertise in curriculum design and content organization. Your task is to analyze, synthesize, and structure information from multiple sources into an organized, coherent, and pedagogically effective learning outline.
 
-        **NGUỒN DỮ LIỆU:**
-        1. Thông tin từ cơ sở dữ liệu: {retrieval_result}
-        2. Thông tin từ web: {search_result}
+    **DATA SOURCES:**
+    1. Information from database: {retrieval_result}
+    2. Information from web: {search_result}
+
+    Return in markdown format.
 
 quizzNode: |
-   Dựa trên thông tin sau:
-            Thông tin từ cơ sở dữ liệu: {retrieval_result}
-            Thông tin từ web: {search_result}
-            Hãy tạo các câu hỏi trắc nghiệm từ cơ bản đến nâng cao với mức độ sinh viên đại học.
-            **YÊU CẦU CHI TIẾT:**
+    Based on the following information:
+    - Information from database: {retrieval_result}
+    - Information from web: {search_result}
 
-            1. **Số lượng và phân bổ câu hỏi:**
-              - Tạo tổng cộng 12 câu hỏi trắc nghiệm:
-                * 4 câu hỏi cơ bản
-                * 5 câu hỏi trung bình
-                * 3 câu hỏi nâng cao
+    Create multiple-choice questions ranging from basic to advanced levels suitable for university students.
 
-            2. **Mức độ câu hỏi:**
-              - **Cơ bản:** Kiểm tra khả năng ghi nhớ và hiểu các khái niệm, định nghĩa và sự kiện cơ bản.
-              - **Trung bình:** Yêu cầu khả năng áp dụng kiến thức để giải quyết vấn đề, phân tích tình huống hoặc so sánh các khái niệm.
-              - **Nâng cao:** Đòi hỏi tư duy phản biện, tổng hợp thông tin từ nhiều nguồn, đánh giá quan điểm, hoặc giải quyết các tình huống phức tạp.
+    **DETAILED REQUIREMENTS:**
 
-            3. **Cấu trúc câu hỏi:**
-              - Mỗi câu hỏi phải có một câu dẫn rõ ràng và 4 phương án trả lời (A, B, C, D).
-              - Chỉ có MỘT đáp án đúng duy nhất.
-              - Các phương án nhiễu (distractors) phải hợp lý và có tính phân biệt.
-              - Đối với mỗi câu hỏi, cung cấp:
-                * Câu hỏi
-                * Bốn phương án trả lời
-                * Đáp án đúng
-                * Giải thích ngắn gọn tại sao đáp án đó đúng
-                * Nguồn thông tin được sử dụng (cơ sở dữ liệu hoặc web)       
+    1. **Number and Distribution of Questions:**
+      - Create a total of 12 multiple-choice questions:
+        * 4 basic questions
+        * 5 intermediate questions
+        * 3 advanced questions
+
+    2. **Question Levels:**
+      - **Basic:** Test the ability to recall and understand basic concepts, definitions, and facts.
+      - **Intermediate:** Require the ability to apply knowledge to solve problems, analyze situations, or compare concepts.
+      - **Advanced:** Demand critical thinking, synthesis of information from multiple sources, evaluation of viewpoints, or solving complex scenarios.
+
+    3. **Question Structure:**
+      - Each question must have a clear stem and 4 answer options (A, B, C, D).
+      - There must be only ONE correct answer.
+      - The distractors (incorrect options) must be plausible and discriminating.
+      - For each question, provide:
+        * The question
+        * Four answer options
+        * The correct answer
+        * A brief explanation of why the answer is correct
+        * The source of information used (database or web)
 
 
+evaluateNode: |
+    Đánh Giá Bộ Câu Hỏi Trắc Nghiệm
+    Bạn là chuyên gia đánh giá giáo dục với kinh nghiệm trong thiết kế câu hỏi trắc nghiệm. Hãy đánh giá bộ câu hỏi sau một cách ngắn gọn nhưng toàn diện.
+
+    ## Thông tin đầu vào
+
+    - **Cấp độ học tập: Đại Học
+    - **Bộ câu hỏi:** {quizz_result}
+
+    ## Tiêu chí đánh giá
+    Đánh giá từng câu hỏi theo thang điểm 1-5 (1=kém, 5=xuất sắc):
+
+    ### Đánh giá từng câu hỏi
+    **Câu hỏi [Số]:**
+    - **Độ chính xác:** [Điểm]/5 - [Nhận xét ngắn gọn]
+    - **Hiệu quả sư phạm:** [Điểm]/5 - [Nhận xét ngắn gọn]
+    - **Kỹ thuật xây dựng:** [Điểm]/5 - [Nhận xét ngắn gọn]
+    - **Phát triển tư duy:** [Điểm]/5 - [Nhận xét ngắn gọn]
+    - **Tính bao hàm:** [Điểm]/5 - [Nhận xét ngắn gọn]
+    - **Đề xuất cải thiện:** [Gợi ý cụ thể]
+
+    ### Đánh giá theo cấp độ
+    - **Câu hỏi cơ bản:** [Điểm]/5 - [Nhận xét về chất lượng, độ khó phù hợp]
+    - **Câu hỏi trung bình:** [Điểm]/5 - [Nhận xét về chất lượng, độ khó phù hợp]
+    - **Câu hỏi nâng cao:** [Điểm]/5 - [Nhận xét về chất lượng, độ khó phù hợp]
+
+    ### Đánh giá tổng thể
+    - **Điểm trung bình:** [Điểm trung bình tổng thể]
+    - **Điểm mạnh:** [Liệt kê 3-4 điểm mạnh chính]
+    - **Điểm cần cải thiện:** [Liệt kê 3-4 điểm cần cải thiện]
+    - **Câu hỏi có vấn đề nhất:** [Xác định 2-3 câu hỏi có vấn đề nhất và đề xuất cách chỉnh sửa]
+    - **Kết luận:** [Đánh giá tổng thể về chất lượng và tính khả dụng]
